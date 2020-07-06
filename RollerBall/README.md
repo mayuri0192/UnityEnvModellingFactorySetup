@@ -19,5 +19,5 @@
 6. **Mean Reward** will be updated on Terminal.
 7. Press **Play** button in Unity to end training process.
 8. To check the result, type `tensorboard --logdir=results` on Terminal.
-9. For even in depth explanation, check out Unity's ML-Agents [Getting Started Guide](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Getting-Started.md).
+9. For in-depth explanation, check out Unity's ML-Agents [Getting Started Guide](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Getting-Started.md).
 
