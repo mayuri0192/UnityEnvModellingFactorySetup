@@ -3,10 +3,10 @@
 ## Installation
 1. Follow the [ML-Agents Toolkit](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md) installatioin guide.
 
-## RollerBall Procedure
+## Drone Procedure
 1. Launch Unity Hub.
 2. Choose **Add** option on Project dialog.
-3. Locate RollerBall Project in `UnityEnvModelingFactorySetup/RollerBall` and click **Open**.
+3. Locate Drone Project in `UnityEnvModelingFactorySetup/Drone` and click **Open**.
 4. Drag **SampleScene** located in `Scene` directory to **Hierarcy**.
 5. Start modify!
 
@@ -14,7 +14,7 @@
 1. Launch RollerBall.
 2. Open Terminal. 
 3. Activate **ml-agents** environment.
-4. Run `mlagents-learn PATH/To/Your/Environment/UnityEnvModellingFactorySetup/RollerBall/config/ppo/rollerball_config.yaml --run-id=RollerBall_Run1`.
+4. Run `mlagents-learn PATH/To/Your/Environment/UnityEnvModellingFactorySetup/RollerBall/config/ppo/drone_config.yaml --run-id=Drone_Run1`.
 5. Once "Start training by pressing the Play button in the Unity Editor" shows up on your terminal, press **Play** button in Unity.
 6. **Mean Reward** will be updated on Terminal.
 7. Press **Play** button in Unity to end training process.
