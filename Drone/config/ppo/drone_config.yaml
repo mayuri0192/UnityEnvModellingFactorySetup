@@ -1,0 +1,24 @@
+  RollerBall:
+    trainer: ppo
+    batch_size: 10
+    beta: 0.0005
+    buffer_size: 100
+    epsilon: 0.3
+    hidden_units: 128
+    lambd: 0.99
+    learning_rate: 0.0000005
+    learning_rate_schedule: linear
+    max_steps: 5.0e7
+    memory_size: 256
+    normalize: true
+    num_epoch: 3
+    num_layers: 2
+    time_horizon: 1000
+    sequence_length: 64
+    summary_freq: 1000
+    use_recurrent: false
+    vis_encode_type: simple
+    reward_signals:
+      extrinsic:
+        strength: 1.0
+        gamma: 0.99
