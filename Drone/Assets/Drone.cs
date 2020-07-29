@@ -8,6 +8,10 @@ using System.Diagnostics;
 using System.Linq;
 using System;
 
+//Drone agent do not use NavMesh to travel
+//Refer to comment on Roller Agent for better understand of the whole environmnet
+//Will comment only on different areas between two agents
+
 public class Drone : Agent
 {
     Rigidbody rBody;
@@ -27,6 +31,8 @@ public class Drone : Agent
     public TargetScript2 Target2;
 
     private const int numDirection = 180;
+    //For Drone Agent numDirection of at least 180 is recommened
+    //Lower numdirection will require Drone to move more to notice the target
     private const int maxDistance = 20;
 
     private float speed = 10;
@@ -78,7 +84,7 @@ public class Drone : Agent
         if (agent_agentLoc != Vector3.zero)
         {
             sensor.AddObservation(agent_agentLoc);
-            AddReward(0.005f);
+            AddReward(0.005f);//Add reward when Drone Agent notice Roller Agent
             agent_agentLoc = Vector3.zero;
         }
         if (agent_endLoc != Vector3.zero)
@@ -108,7 +114,7 @@ public class Drone : Agent
         if (agent_finalTargLoc != Vector3.zero)
         {
             sensor.AddObservation(agent_finalTargLoc);
-            AddReward(0.005f);
+            AddReward(0.005f);//Add Reward when Drone Agent observe Target 3
             agent_finalTargLoc = Vector3.zero;
         }
         sensor.AddObservation(this.transform.localPosition);
@@ -130,7 +136,7 @@ public class Drone : Agent
         if (collision.collider.CompareTag("Walls"))
         {
             UnityEngine.Debug.Log("Drone Wall Hit");
-            AddReward(-0.05f);
+            AddReward(-0.05f);//Subtract reward when Drone Agent collids to the wall
             EndEpisode();
             RollerAgent.EndEpisode();
         }
@@ -141,12 +147,12 @@ public class Drone : Agent
         foreach (var direction in SphereDirections(numDirection))
         {
             //Debug.DrawRay(transform.position, direction, Color.blue);
-
+            //Uncomment the debug code to see diection of the RayCast rays
 
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direction, out hit, maxDistance))
             {
-                if (hit.collider.tag == "RollerAgent")
+                if (hit.collider.tag == "RollerAgent")//RollerAgent
                 {
                     agent_agentLoc = hit.point;
                 }
@@ -182,6 +188,11 @@ public class Drone : Agent
 
 
     private Vector3[] SphereDirections(int numDirections)
+    //I have used solution provided by titan68
+    //This method allowes to create directions in all directions
+    //Have to modify this method soon since Human agent will have limited field of view
+    //credit: titan68
+    //https://answers.unity.com/questions/43812/how-to-get-raycasts-in-all-directionsvector3.html
     {
         var pts = new Vector3[numDirections];
         var il = Math.PI * (3 - Math.Sqrt(5));
