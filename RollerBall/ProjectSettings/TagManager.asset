@@ -7,6 +7,16 @@ TagManager:
   - Interactive
   - Interactive2
   - Walls
+  - Agent
+  - Machine A
+  - Operator
+  - Machine B
+  - Machine
+  - Null
+  - Machine C
+  - Machine D
+  - Floor
+  - Restricted
   layers:
   - Default
   - TransparentFX

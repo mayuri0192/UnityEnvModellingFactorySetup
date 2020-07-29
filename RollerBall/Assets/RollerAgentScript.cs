@@ -5,119 +5,105 @@ using Unity.MLAgents.Sensors;
 using System.Collections.Specialized;
 using System.CodeDom;
 using System.Diagnostics;
+using System;
 
 public class RollerAgentScript : Agent
 {
     Rigidbody rBody;
 
-    public OperatorScript Operator;
-    //float reward=0.0f;
+    public Game_Master Master;
+    public int k;
 
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
     }
 
-    public Transform Target;
     public override void OnEpisodeBegin()
     {
-        //reward = 0.0f;
-        Operator.transform.localPosition = new Vector3(UnityEngine.Random.Range(-3, 3), 0.5f, 0);
-        Operator.rBody.angularVelocity = Vector3.zero;
-        Operator.rBody.velocity = Vector3.zero;
-        //UnityEngine.Debug.Log(reward);
-        //if (this.transform.localPosition.y < 0)
-        //{
-        //    // If the Agent fell, zero its momentum
-        //    this.rBody.angularVelocity = Vector3.zero;
-        //    this.rBody.velocity = Vector3.zero;
-        //    this.transform.localPosition = new Vector3(0, 0.5f, 0);
-        //}
+        int rand = UnityEngine.Random.Range(0, 4);
+        if (rand == 0)
+        {
+            this.transform.localPosition = new Vector3(UnityEngine.Random.Range(-3.75f, -2.0f), 0.5f, UnityEngine.Random.Range(-3.75f, 3.75f));
+        }
 
-        // Move the target to a new spot
-        //Operator.localPosition = new Vector3(-1.0f, 0.5f, -1.0f);
-        //Operator.rBody2.velocity = new Vector3(0, 0, 3.0f);
+        if (rand == 1)
+        {
+            this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 3.75f), 0.5f, UnityEngine.Random.Range(-3.75f, 3.75f));
+        }
 
-        Target.localPosition = new Vector3(3.0f, 0.5f, 3.0f);
-        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(-3, 3), 0.5f, UnityEngine.Random.Range(-3, 3));
+        if (rand == 2)
+        {
+            this.transform.localPosition = new Vector3(UnityEngine.Random.Range(-0.75f, 0.75f), 0.5f, UnityEngine.Random.Range(2.25f, 3.75f));
+        }
+
+        if (rand == 3)
+        {
+            this.transform.localPosition = new Vector3(UnityEngine.Random.Range(-0.75f, 0.75f), 0.5f, UnityEngine.Random.Range(-3.75f, -2.25f));
+        }
         this.rBody.angularVelocity = Vector3.zero;
         this.rBody.velocity = Vector3.zero;
+        Master.Start();
     }
-
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Target and Agent positions
-        //sensor.AddObservation(Target.localPosition);
         sensor.AddObservation(this.transform.localPosition);
-
-        // Agent velocity
         sensor.AddObservation(rBody.velocity.x);
         sensor.AddObservation(rBody.velocity.z);
+        sensor.AddObservation(Master.Flags[0]);
+        sensor.AddObservation(Master.Flags[1]);
+        sensor.AddObservation(Master.Flags[2]);
+        sensor.AddObservation(Master.Flags[3]);
+        //sensor.AddObservation(Master.Target1.localPosition);
+        //sensor.AddObservation(Master.Target2.localPosition);
+        //sensor.AddObservation(Master.Target3.localPosition);
+        //sensor.AddObservation(Master.Target4.localPosition);
     }
 
     public float speed = 10;
     public override void OnActionReceived(float[] vectorAction)
     {
-        // Actions, size = 2
         Vector3 controlSignal = Vector3.zero;
         controlSignal.x = vectorAction[0];
         controlSignal.z = vectorAction[1];
-        rBody.AddForce(controlSignal * speed);
-        // Rewards
-        //float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
-        //float distanceToOperator = Vector3.Distance(this.transform.localPosition, Operator.transform.localPosition);
+        this.rBody.AddForce(controlSignal * speed);
+        //AddReward(- 0.0001f);
+    }
 
-        // Reached target
-        //if (distanceToOperator < 1.6f)
-        //{
-            //UnityEngine.Debug.Log("Operator Nearby");
-            //AddReward(-0.05f);
-            //reward = reward-0.5f;
-            //UnityEngine.Debug.Log(reward);
-        //}
+    void OnCollisionEnter(Collision collision)
+    {       
+        if (collision.gameObject.tag != "Floor")
+        {
+            if (collision.gameObject.name.Contains("Target"))
+            {
+                collision.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                string s = collision.gameObject.name;
+                string subs = s.Substring(s.Length - 1);
+                k = Int32.Parse(subs) - 1;
+                if (Master.Flags[k] == 0)
+                {
+                    AddReward(0.5f);
+                    Master.Count(k);
+                }
+            }
+            else
+            {
+                AddReward(-0.5f);
+                UnityEngine.Debug.Log("Collision");
+                Master.EndAll();
+            }
+        }    
+    }
 
-            //AddReward(-1.0f);
-            //reward = reward - 1.0f;
-            //UnityEngine.Debug.Log(reward);
-            
-            //reward = reward + 750.0f;
-            //UnityEngine.Debug.Log(reward);
-
-        // Fell off platform
-        //if (this.transform.localPosition.y < 0)
-        //{
-        //    EndEpisode();
-        //}
+    public void End()
+    {
+        EndEpisode();
     }
 
     public override void Heuristic(float[] actionsOut)
     {
         actionsOut[0] = Input.GetAxis("Horizontal");
         actionsOut[1] = Input.GetAxis("Vertical");
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Walls"))
-        {
-            UnityEngine.Debug.Log("Wall Hit");
-            AddReward(-0.005f);
-            EndEpisode();
-        }
-
-        if (collision.gameObject.CompareTag("Interactive"))
-        {
-            UnityEngine.Debug.Log("Operator Hit");
-            AddReward(-0.005f);
-            EndEpisode();
-        }
-
-        if (collision.gameObject.CompareTag("Interactive2"))
-        {
-            UnityEngine.Debug.Log("Target Hit");
-            AddReward(1.0f);
-            EndEpisode();
-        }
     }
 }

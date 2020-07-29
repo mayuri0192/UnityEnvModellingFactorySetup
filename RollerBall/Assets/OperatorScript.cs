@@ -12,13 +12,14 @@ public class OperatorScript : MonoBehaviour
 
     void Start()
     {
+        gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
         rBody = GetComponent<Rigidbody>();
-        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(-3, 3), 0.5f, 0);
+        this.transform.localPosition = new Vector3(0, 0.5f, 0);
     }
 
     void FixedUpdate()
     {
-        if (Convert.ToInt32(Time.time/5) % 2 == 0)
+        if (Convert.ToInt32(Time.time/2) % 2 == 0)
         {
             this.rBody.AddForce(10*Vector3.forward);
         }
