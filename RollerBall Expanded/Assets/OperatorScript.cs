@@ -9,6 +9,7 @@ using System;
 public class OperatorScript : MonoBehaviour
 {
     public Rigidbody rBody;
+    public int wall = 0;
 
     void Start()
     {
@@ -16,16 +17,27 @@ public class OperatorScript : MonoBehaviour
         rBody = GetComponent<Rigidbody>();
     }
 
+    //Track Wall Hit
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Wall"))
+        {
+            if (this.wall == 0)
+            { this.wall = 1; }
+            else
+            { this.wall = 0; }
+        }
+    }
     //Move Operator
     void FixedUpdate()
     {
-        if (Convert.ToInt32(Time.time / 5) % 2 == 0) //Periodicity
+        if (this.wall == 1)
         {
-            this.rBody.AddForce(10 * Vector3.right);
+            this.rBody.AddForce(5 * Vector3.right);
         }
         else
         {
-            this.rBody.AddForce(10 * Vector3.left);
+            this.rBody.AddForce(5 * Vector3.left);
         }
     }
 }

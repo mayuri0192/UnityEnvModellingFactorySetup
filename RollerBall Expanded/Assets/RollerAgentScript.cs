@@ -69,33 +69,33 @@ public class RollerAgentScript : Agent
         sensor.AddObservation(Master.Flags[3]);
     }
 
-    public override void OnActionReceived(float[] vectorAction)//Discrete Action Space - This implementation works bad (Try the game manually :P)
+    public override void OnActionReceived(float[] vectorAction)//Discrete Action Space
     {
         var movement = (int)vectorAction[0];
 
         if (movement == 0)
         {
-            this.rBody.AddForce(new Vector3(10f, 0f, 0f));
+            this.rBody.velocity = (new Vector3(10f, 0f, 0f));
         }
 
         else if (movement == 1)
         {
-            this.rBody.AddForce(new Vector3(-10f, 0f, 0f));
+            this.rBody.velocity = (new Vector3(-10f, 0f, 0f));
         }
 
         else if (movement == 2)
         {
-            this.rBody.AddForce(new Vector3(0f, 0f, 10f));
+            this.rBody.velocity = (new Vector3(0f, 0f, 10f));
         }
 
         else if (movement == 3)
         {
-            this.rBody.AddForce(new Vector3(0f, 0f, -10f));
+            this.rBody.velocity = (new Vector3(0f, 0f, -10f));
         }
 
         else if (movement == 4)
         {
-            this.rBody.AddForce(new Vector3(0f, 0f, 0f));
+            this.rBody.velocity = (new Vector3(0f, 0f, 0f));
         }
 
         c = c + 1; //Increment Action Count

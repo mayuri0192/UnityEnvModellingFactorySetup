@@ -79,11 +79,11 @@ public class Game_Master : MonoBehaviour
         }
 
         //Reset Operators with Randomized Position along Restricted Area
-        Operator1.transform.localPosition = new Vector3(0f, 0.5f, 6.75f);
+        Operator1.transform.localPosition = new Vector3(UnityEngine.Random.Range(-13f, 13f), 0.5f, 6.75f);
         Operator1.rBody.angularVelocity = Vector3.zero;
         Operator1.rBody.velocity = Vector3.zero;
 
-        Operator2.transform.localPosition = new Vector3(0f, 0.5f, -6.75f);
+        Operator2.transform.localPosition = new Vector3(UnityEngine.Random.Range(-13f, 13f), 0.5f, -6.75f);
         Operator2.rBody.angularVelocity = Vector3.zero;
         Operator2.rBody.velocity = Vector3.zero;       
     }

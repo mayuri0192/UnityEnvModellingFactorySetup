@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rBody: {fileID: 61623131}
+  i: 0
 --- !u!1 &118491478
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +676,7 @@ MonoBehaviour:
     VectorActionSize: 05000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 4b4a4823383195d48b04142e2ba52348, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: ecbd68883ec07e94594c21da6fef1fa7, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: RollerBall
@@ -1569,7 +1570,7 @@ MonoBehaviour:
     VectorActionSize: 05000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 4b4a4823383195d48b04142e2ba52348, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: ecbd68883ec07e94594c21da6fef1fa7, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: RollerBall
@@ -2267,6 +2268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rBody: {fileID: 1598692478}
+  i: 0
 --- !u!54 &1598692478
 Rigidbody:
   m_ObjectHideFlags: 0
