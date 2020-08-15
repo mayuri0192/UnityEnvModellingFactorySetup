@@ -225,9 +225,10 @@ GameObject:
   - component: {fileID: 61623130}
   - component: {fileID: 61623134}
   - component: {fileID: 61623133}
-  - component: {fileID: 61623132}
-  - component: {fileID: 61623131}
+  - component: {fileID: 61623135}
   - component: {fileID: 61623136}
+  - component: {fileID: 61623131}
+  - component: {fileID: 61623132}
   m_Layer: 0
   m_Name: Operator 1
   m_TagString: Operator
@@ -243,13 +244,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61623129}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.2, y: 0.5, z: 6.6}
+  m_LocalPosition: {x: 5.2, y: 1, z: 6.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1431787416}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &61623131
+--- !u!136 &61623131
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61623129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &61623132
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,23 +276,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &61623132
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61623129}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &61623133
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -324,7 +326,29 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61623129}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!195 &61623135
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61623129}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &61623136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,11 +358,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 61623129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d9ff76d1bfe3b4abc8834ba1621d4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 682587f598fd56d4887c12dab388281d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rBody: {fileID: 61623131}
-  i: 0
+  roller: {fileID: 304065444}
+  roller2: {fileID: 780085110}
+  Target1: {fileID: 146219881}
+  Target2: {fileID: 1849257352}
+  Target3: {fileID: 597116578}
+  Target4: {fileID: 56972871}
 --- !u!1 &118491478
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +680,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304065440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: 0.5, z: -16.7}
+  m_LocalPosition: {x: -4.85, y: 0.5, z: -6.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1431787416}
@@ -676,7 +704,7 @@ MonoBehaviour:
     VectorActionSize: 05000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: ecbd68883ec07e94594c21da6fef1fa7, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: fe5da224306ed1e48bbdee87762fd6d2, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: RollerBall
@@ -713,6 +741,8 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   Master: {fileID: 1431787417}
+  Operator1: {fileID: 61623136}
+  Operator2: {fileID: 1598692477}
   k: 0
   c: 0
   e: 0
@@ -1570,7 +1600,7 @@ MonoBehaviour:
     VectorActionSize: 05000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: ecbd68883ec07e94594c21da6fef1fa7, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: fe5da224306ed1e48bbdee87762fd6d2, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: RollerBall
@@ -1607,6 +1637,8 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   Master: {fileID: 1431787417}
+  Operator1: {fileID: 61623136}
+  Operator2: {fileID: 1598692477}
   k: 0
   c: 0
   e: 0
@@ -2231,9 +2263,10 @@ GameObject:
   - component: {fileID: 1598692476}
   - component: {fileID: 1598692481}
   - component: {fileID: 1598692480}
+  - component: {fileID: 1598692482}
+  - component: {fileID: 1598692477}
   - component: {fileID: 1598692479}
   - component: {fileID: 1598692478}
-  - component: {fileID: 1598692477}
   m_Layer: 0
   m_Name: Operator 2
   m_TagString: Operator
@@ -2249,7 +2282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598692475}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -6.75}
+  m_LocalPosition: {x: 0, y: 1, z: -6.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1431787416}
@@ -2264,11 +2297,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1598692475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d9ff76d1bfe3b4abc8834ba1621d4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 682587f598fd56d4887c12dab388281d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rBody: {fileID: 1598692478}
-  i: 0
+  roller: {fileID: 304065444}
+  roller2: {fileID: 780085110}
+  Target1: {fileID: 146219881}
+  Target2: {fileID: 1849257352}
+  Target3: {fileID: 597116578}
+  Target4: {fileID: 56972871}
 --- !u!54 &1598692478
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2281,22 +2318,23 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &1598692479
-SphereCollider:
+--- !u!136 &1598692479
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598692475}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1598692480
 MeshRenderer:
@@ -2344,7 +2382,29 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598692475}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!195 &1598692482
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598692475}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1599724321
 GameObject:
   m_ObjectHideFlags: 0

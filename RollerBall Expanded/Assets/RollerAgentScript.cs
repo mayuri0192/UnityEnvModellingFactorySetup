@@ -12,6 +12,8 @@ public class RollerAgentScript : Agent
     Rigidbody rBody;
 
     public Game_Master Master;
+    public OperatorNavMeshScript Operator1;
+    public OperatorNavMeshScript Operator2;
     public int k;
     public int c = 0; //Action Count
     public int e = 0; //Episode Count
@@ -122,7 +124,7 @@ public class RollerAgentScript : Agent
                 string subs = s.Substring(s.Length - 1);
                 k = Int32.Parse(subs) - 1;
                 if (Master.Flags[k] == 0)
-                {   
+                {
                     collision.gameObject.tag = "Null";
                     Master.Flags[k] = 1;
                     AddReward(0.33f*this.r_count);
@@ -137,19 +139,19 @@ public class RollerAgentScript : Agent
                 }
             }
 
-            //Ngative Reward if Operator is hit and End Episode
-            else if (collision.gameObject.name.Contains("Operator"))
-            {
-                AddReward(-0.1f);
-                Master.EndAll();
-            }
-
             //Negative Reward for other collisions
             else
             {
                 AddReward(-0.00625f);
             }
         }
+    }
+
+    //Negative Reward if Operator is hit and End Episode
+    public void OpCollision()
+    {
+        AddReward(-0.1f);
+        Master.EndAll();
     }
 
     //End Episode

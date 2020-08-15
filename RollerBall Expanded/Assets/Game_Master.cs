@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using UnityEngine;
 
+//Use rollerball_config_2.yaml for training
+
 public class Game_Master : MonoBehaviour
 {
     //Instantiate Agents, Targets and Operators
@@ -14,8 +16,8 @@ public class Game_Master : MonoBehaviour
     public Transform Target2;
     public Transform Target3;
     public Transform Target4;
-    public OperatorScript Operator1;
-    public OperatorScript Operator2;
+    public OperatorNavMeshScript Operator1;
+    public OperatorNavMeshScript Operator2;
     
     //Flags for Targets
     public int[] Flags = {0, 0, 0, 0};
@@ -78,14 +80,9 @@ public class Game_Master : MonoBehaviour
             Target4.tag = "Null";
         }
 
-        //Reset Operators with Randomized Position along Restricted Area
-        Operator1.transform.localPosition = new Vector3(UnityEngine.Random.Range(-13f, 13f), 0.5f, 6.75f);
-        Operator1.rBody.angularVelocity = Vector3.zero;
-        Operator1.rBody.velocity = Vector3.zero;
-
-        Operator2.transform.localPosition = new Vector3(UnityEngine.Random.Range(-13f, 13f), 0.5f, -6.75f);
-        Operator2.rBody.angularVelocity = Vector3.zero;
-        Operator2.rBody.velocity = Vector3.zero;       
+        //Initialize Operators
+        Operator1.Start();
+        Operator2.Start();
     }
     
     //Flag Checker
