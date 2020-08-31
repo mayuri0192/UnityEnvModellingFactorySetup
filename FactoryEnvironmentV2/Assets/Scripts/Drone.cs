@@ -40,7 +40,7 @@ public class Drone : Agent
     public TargetScript6 Target6;
     public TargetScript7 Target7;
 
-    private const int numDirection = 100;
+    private const int numDirection = 400;
     //For Drone Agent numDirection of at least 180 is recommened
     //Lower numdirection will require Drone to move more to notice the target
     private const int maxDistance = 20;
